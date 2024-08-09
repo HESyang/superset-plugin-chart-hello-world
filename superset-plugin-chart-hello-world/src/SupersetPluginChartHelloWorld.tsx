@@ -16,9 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import React, { useEffect, createRef } from 'react';
+import { useEffect, createRef } from 'react';
 import { styled } from '@superset-ui/core';
-import { SupersetPluginChartHelloWorldProps, SupersetPluginChartHelloWorldStylesProps } from './types';
+import {
+  SupersetPluginChartHelloWorldProps,
+  SupersetPluginChartHelloWorldStylesProps,
+} from './types';
 
 // The following Styles component is a <div> element, which has been styled using Emotion
 // For docs, visit https://emotion.sh/docs/styled
@@ -58,7 +61,9 @@ const Styles = styled.div<SupersetPluginChartHelloWorldStylesProps>`
  *  * FormData (your controls!) provided as props by transformProps.ts
  */
 
-export default function SupersetPluginChartHelloWorld(props: SupersetPluginChartHelloWorldProps) {
+export default function SupersetPluginChartHelloWorld(
+  props: SupersetPluginChartHelloWorldProps,
+) {
   // height and width are the height and width of the DOM element as it exists in the dashboard.
   // There is also a `data` prop, which is, of course, your DATA 🎉
   const { data, height, width } = props;

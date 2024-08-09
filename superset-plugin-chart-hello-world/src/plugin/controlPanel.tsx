@@ -1,19 +1,15 @@
-import React from 'react';
 import {
   ensureIsArray,
   QueryFormColumn,
   t,
   AdhocColumn,
 } from '@superset-ui/core';
-import {
-  ControlPanelConfig,
-  ColumnOption,
-} from '@superset-ui/chart-controls';
+import { ControlPanelConfig, ColumnOption } from '@superset-ui/chart-controls';
 
 // Helper functions to replace isAdhocColumn and isPhysicalColumn
-const isAdhocColumn = (col: QueryFormColumn): col is AdhocColumn => 
+const isAdhocColumn = (col: QueryFormColumn): col is AdhocColumn =>
   typeof col === 'object' && 'label' in col;
-const isPhysicalColumn = (col: QueryFormColumn): col is string => 
+const isPhysicalColumn = (col: QueryFormColumn): col is string =>
   typeof col === 'string';
 
 const config: ControlPanelConfig = {
@@ -69,22 +65,27 @@ export const formDataOverrides = (formData: any) => {
   const groupbyColumns = (formData.columns || []).filter(
     (col: QueryFormColumn) => {
       const groupbyRows = ensureIsArray(formData.groupbyRows);
-      return !groupbyRows.some((row: QueryFormColumn) => 
-        (isPhysicalColumn(row) && isPhysicalColumn(col) && row === col) ||
-        (isAdhocColumn(row) && isAdhocColumn(col) && row.label === col.label)
+      return !groupbyRows.some(
+        (row: QueryFormColumn) =>
+          (isPhysicalColumn(row) && isPhysicalColumn(col) && row === col) ||
+          (isAdhocColumn(row) && isAdhocColumn(col) && row.label === col.label),
       );
-    }
+    },
   );
-  
+
   const filteredColumns = (formData.columns || []).filter(
-    (col: QueryFormColumn) => {
-      return !groupbyColumns.some((groupCol: QueryFormColumn) => 
-        (isPhysicalColumn(groupCol) && isPhysicalColumn(col) && groupCol === col) ||
-        (isAdhocColumn(groupCol) && isAdhocColumn(col) && groupCol.label === col.label)
-      );
-    }
+    (col: QueryFormColumn) =>
+      !groupbyColumns.some(
+        (groupCol: QueryFormColumn) =>
+          (isPhysicalColumn(groupCol) &&
+            isPhysicalColumn(col) &&
+            groupCol === col) ||
+          (isAdhocColumn(groupCol) &&
+            isAdhocColumn(col) &&
+            groupCol.label === col.label),
+      ),
   );
-  
+
   return {
     ...formData,
     columns: filteredColumns,
