@@ -6,3 +6,6 @@ After npm run build, you should see information as follows. More detailed guide 
 "Test Suites: 3 passed, 3 total
 Tests:       3 passed, 3 total
 Snapshots:   0 total"
+
+You can find more detailed steps here.
+https://medium.com/@ligtleyang/how-to-install-a-hello-world-visualization-plugin-to-apache-superset-89d14b396d27
